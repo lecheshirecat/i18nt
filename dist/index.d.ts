@@ -5,7 +5,7 @@ export interface i18nTranslation {
     [lang: string]: i18nJSON | undefined;
 }
 export interface i18nParameters {
-    locale: string;
+    locale?: string;
     tokens?: any[];
     count?: number;
     reversed?: boolean;

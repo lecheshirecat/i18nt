@@ -15,7 +15,7 @@ export interface i18nTranslation {
 }
 
 export interface i18nParameters {
-    locale: string
+    locale?: string
     tokens?: any[]
     count?: number
     reversed?: boolean
