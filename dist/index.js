@@ -7,20 +7,15 @@ const _I18NT_SUPPORTED_LOCALES_ = ['en'];
 function getLocale() {
     var _a;
     const defaultLocale = _I18NT_SUPPORTED_LOCALES_[0];
-    var storageLocale = localStorage.getItem(_I18NT_LOCALE_KEY_);
-    var locale = (_a = storageLocale !== null && storageLocale !== void 0 ? storageLocale : window.navigator.language) !== null && _a !== void 0 ? _a : defaultLocale;
+    let storageLocale = localStorage.getItem(_I18NT_LOCALE_KEY_);
+    let locale = (_a = storageLocale !== null && storageLocale !== void 0 ? storageLocale : window.navigator.language) !== null && _a !== void 0 ? _a : defaultLocale;
     if (locale === 'default') {
         locale = window.navigator.language;
     }
     if (locale.length > 2) {
         locale = locale.substr(0, 2);
     }
-    if (_I18NT_SUPPORTED_LOCALES_.indexOf(locale) > -1) {
-        localStorage.setItem(_I18NT_LOCALE_KEY_, locale);
-        return locale;
-    }
-    localStorage.setItem(_I18NT_LOCALE_KEY_, defaultLocale);
-    return defaultLocale;
+    return _I18NT_SUPPORTED_LOCALES_.indexOf(locale) > -1 ? locale : defaultLocale;
 }
 exports.getLocale = getLocale;
 function setLocale(locale) {
@@ -34,7 +29,9 @@ function addTranslation(locale, translation) {
     if (!(locale !== null && locale !== void 0 ? locale : '').length) {
         return;
     }
-    _I18NT_SUPPORTED_LOCALES_.push(locale);
+    if (_I18NT_SUPPORTED_LOCALES_.indexOf(locale) < 0) {
+        _I18NT_SUPPORTED_LOCALES_.push(locale);
+    }
     _I18NT_TRANSLATIONS_[locale] = translation;
 }
 exports.addTranslation = addTranslation;

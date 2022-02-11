@@ -32,9 +32,9 @@ const _I18NT_SUPPORTED_LOCALES_: string[] = ['en']
 
 export function getLocale(): string {
     const defaultLocale: string = _I18NT_SUPPORTED_LOCALES_[0]
-    var storageLocale: any = localStorage.getItem(_I18NT_LOCALE_KEY_)
+    let storageLocale: any = localStorage.getItem(_I18NT_LOCALE_KEY_)
 
-    var locale = storageLocale ?? window.navigator.language ?? defaultLocale
+    let locale = storageLocale ?? window.navigator.language ?? defaultLocale
     if (locale === 'default') {
         locale = window.navigator.language
     }
@@ -42,13 +42,7 @@ export function getLocale(): string {
         locale = locale.substr(0, 2)
     }
 
-    if (_I18NT_SUPPORTED_LOCALES_.indexOf(locale) > -1) {
-        localStorage.setItem(_I18NT_LOCALE_KEY_, locale)
-        return locale
-    }
-
-    localStorage.setItem(_I18NT_LOCALE_KEY_, defaultLocale)
-    return defaultLocale
+    return _I18NT_SUPPORTED_LOCALES_.indexOf(locale) > -1 ? locale : defaultLocale
 }
 
 export function setLocale(locale?: string | null): void {
@@ -62,7 +56,9 @@ export function addTranslation(locale: string, translation?: i18nJSON): void {
     if (!(locale ?? '').length) {
         return
     }
-    _I18NT_SUPPORTED_LOCALES_.push(locale)
+    if (_I18NT_SUPPORTED_LOCALES_.indexOf(locale) < 0) {
+        _I18NT_SUPPORTED_LOCALES_.push(locale)
+    }
     _I18NT_TRANSLATIONS_[locale] = translation
 }
 
