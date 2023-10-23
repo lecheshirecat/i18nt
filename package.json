@@ -1,6 +1,6 @@
 {
   "name": "@cheshirecat/i18nt",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "author": "cheshirecat <ca.leduc@me.com>",
   "license": "ISC",
   "description": "A lightweight internationalization module with TypeScript support",
@@ -11,7 +11,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
-    "typescript": "^4.5.5"
+    "typescript": "^5.2.2"
   },
   "keywords": [
     "i18n",
